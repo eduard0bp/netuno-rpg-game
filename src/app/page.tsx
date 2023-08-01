@@ -57,7 +57,7 @@ export default function Home() {
           zIndex: -1
         }}
       />
-      <div className="h-[400px] w-[600px] bg-black bg-opacity-70 flex flex-col items-center p-8 justify-center">
+      <div className="h-fit w-[600px] bg-black bg-opacity-70 flex flex-col items-center p-8 justify-center">
         <h1 className="text-amber-400 font-bold text-4xl mb-2">
           Netuno RPG Game
         </h1>
