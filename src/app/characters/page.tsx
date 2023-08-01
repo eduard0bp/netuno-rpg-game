@@ -1,7 +1,6 @@
 'use client'
 import { useRouter } from 'next/navigation'
 import { isAuthenticated } from '../utils/auth'
-import { Logout } from '../components/Logout'
 import ClassCards from '../components/ClassCard'
 
 const Characters = () => {

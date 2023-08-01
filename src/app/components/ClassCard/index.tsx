@@ -1,6 +1,5 @@
 'use client'
 import { useState } from 'react'
-import Link from 'next/link'
 import Modal from '../Modal'
 import CustomizeForm from '../CustomizeForm'
 
@@ -10,25 +9,25 @@ interface ClassCardProps {
 }
 
 const ClassCard: React.FC<ClassCardProps> = ({ className, classColor }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedClass, setSelectedClass] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [selectedClass, setSelectedClass] = useState<string | null>(null)
   const initialValues = {
     weapon: '',
-    hairColor: '#000000',
-  };
+    hairColor: '#000000'
+  }
 
   const handleFormSubmit = (values: any) => {
-    setSelectedClass(className);
+    setSelectedClass(className)
     sessionStorage.setItem(
       'selectedClass',
       JSON.stringify({ class: className, customization: values })
-    );
-  };
+    )
+  }
 
   const toggleModal = () => {
-    setSelectedClass(className);
-    setIsModalOpen(!isModalOpen);
-  };
+    setSelectedClass(className)
+    setIsModalOpen(!isModalOpen)
+  }
 
   return (
     <div className="flex flex-col items-center p-4 border rounded-lg shadow-md">
@@ -54,8 +53,8 @@ const ClassCard: React.FC<ClassCardProps> = ({ className, classColor }) => {
         </Modal>
       )}
     </div>
-  );
-};
+  )
+}
 
 const ClassCards: React.FC = () => {
   const classList = [
@@ -68,11 +67,8 @@ const ClassCards: React.FC = () => {
 
   return (
     <div className="grid gap-4 grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-      {classList.map((classItem) => (
-        <ClassCard
-          key={classItem.className}
-          {...classItem}
-        />
+      {classList.map(classItem => (
+        <ClassCard key={classItem.className} {...classItem} />
       ))}
     </div>
   )
