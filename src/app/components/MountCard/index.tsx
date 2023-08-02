@@ -32,6 +32,7 @@ const MountCard: React.FC<MountCardProps> = ({
       </button>
       {isModalOpen && (
         <Modal
+          image={mountColor}
           isOpen={isModalOpen}
           onRequestClose={() => setIsModalOpen(false)}
         >

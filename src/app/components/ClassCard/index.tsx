@@ -5,15 +5,17 @@ import CustomizeForm from '../CustomizeForm'
 
 interface ClassCardProps {
   className: string
-  classColor: string
+  image: any
 }
 
-const ClassCard: React.FC<ClassCardProps> = ({ className, classColor }) => {
+const ClassCard: React.FC<ClassCardProps> = ({ className, image }) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedClass, setSelectedClass] = useState<string | null>(null)
   const initialValues = {
     weapon: '',
-    hairColor: '#000000'
+    armor: '',
+    hairColor: '#473333',
+    skinColor: '#FFFFFF'
   }
 
   const handleFormSubmit = (values: any) => {
@@ -30,21 +32,31 @@ const ClassCard: React.FC<ClassCardProps> = ({ className, classColor }) => {
   }
 
   return (
-    <div className="flex flex-col items-center p-4 border rounded-lg shadow-md">
-      <div className={`w-16 h-16 bg-${classColor} rounded-full mb-4`} />
-      <h3 className="text-xl font-bold">{className}</h3>
+    <div className="flex flex-col items-center p-3 border-2 border-amber-400 rounded-lg shadow-md shadow-amber-400">
+      <div
+        className={`w-full h-[400px] bg-cover mb-4`}
+        style={{
+          backgroundImage: `url(${image})`
+        }}
+      />
+      <h3 className="text-xl font-bold text-amber-400 mb-2">{className}</h3>
       <button
-        className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        type="button"
+        className="px-4 py-2 text-black rounded-md w-[270px] mt-2 hover:outline bg-amber-400 hover:bg-transparent hover:outline-amber-400 hover:text-amber-400 font-bold"
         onClick={toggleModal}
       >
         Ver Detalhes
       </button>
       {isModalOpen && (
         <Modal
+          image={image}
           isOpen={isModalOpen}
           onRequestClose={() => setIsModalOpen(false)}
         >
-          <h2 className="text-xl font-bold mb-4">{className}</h2>
+          <h1 className="text-5xl font-bold mb-4 text-amber-400 text-center border-b-2 pb-4 border-amber-400 w-full">
+            {className}
+          </h1>
+          <h2 className='text-2xl font-bold text-amber-400 text-center w-full'>Personalize sua classe</h2>
           <CustomizeForm
             initialValues={initialValues}
             onSubmit={handleFormSubmit}
@@ -56,22 +68,4 @@ const ClassCard: React.FC<ClassCardProps> = ({ className, classColor }) => {
   )
 }
 
-const ClassCards: React.FC = () => {
-  const classList = [
-    { className: 'Paladino', classColor: 'blue-500' },
-    { className: 'Mago', classColor: 'black' },
-    { className: 'Guerreiro', classColor: 'red-500' },
-    { className: 'Arqueiro', classColor: 'green-500' },
-    { className: 'Ladrão', classColor: 'yellow-500' }
-  ]
-
-  return (
-    <div className="grid gap-4 grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-      {classList.map(classItem => (
-        <ClassCard key={classItem.className} {...classItem} />
-      ))}
-    </div>
-  )
-}
-
-export default ClassCards
+export default ClassCard
