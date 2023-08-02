@@ -1,9 +1,13 @@
 'use client'
 import { useEffect, useState } from 'react'
+import { isAuthenticated } from '../utils/auth'
+import { useRouter } from 'next/navigation'
 
 const Details: React.FC = () => {
   const [selectedClass, setSelectedClass] = useState<any | null>(null)
   const [selectedMount, setSelectedMount] = useState<string | null>(null)
+
+  const router = useRouter()
 
   useEffect(() => {
     const classData = sessionStorage.getItem('selectedClass')
@@ -16,6 +20,11 @@ const Details: React.FC = () => {
       setSelectedMount(JSON.parse(mountData))
     }
   }, [])
+
+  if (!isAuthenticated()) {
+    router.push('/')
+    return null
+  }
 
   return (
     <div className="container mx-auto py-8">

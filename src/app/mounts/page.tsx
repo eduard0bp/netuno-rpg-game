@@ -2,11 +2,17 @@
 import { useState } from 'react'
 import MountCard from '../components/MountCard'
 import { useRouter } from 'next/navigation'
+import { isAuthenticated } from '../utils/auth'
 
 const Mounts: React.FC = () => {
   const [selectedMount, setSelectedMount] = useState<string | null>(null)
 
   const router = useRouter()
+
+  if (!isAuthenticated()) {
+    router.push('/')
+    return null
+  }
 
   const mountList = [
     {

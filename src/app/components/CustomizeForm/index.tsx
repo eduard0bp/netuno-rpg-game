@@ -1,6 +1,8 @@
 'use client'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import { useRouter } from 'next/navigation'
+import { Gi3DHammer, GiAbdominalArmor } from 'react-icons/gi'
+import * as yup from 'yup'
 
 const CustomizeForm: React.FC<{
   initialValues: any
@@ -16,56 +18,88 @@ const CustomizeForm: React.FC<{
   }
 
   const weaponOptions: any = {
+    Paladino: ['Lança', 'Escudo'],
+    Atirador: ['Arma'],
     Guerreiro: ['Espada', 'Escudo'],
-    Arqueiro: ['Arco', 'Faca'],
-    Paladino: ['Lança', 'Escudo']
+    Barbaro: ['Machado', 'Marreta'],
+    Arqueiro: ['Arco', 'Faca']
   }
 
-  const validateWeapon = (value: string) => {
-    if (!value) {
-      return 'Selecione uma arma'
-    }
-    if (selectedClass && weaponOptions[selectedClass].indexOf(value) === -1) {
-      return `Arma inválida para a classe ${selectedClass}`
-    }
-    return undefined
+  const armorOptions: any = {
+    Paladino: ['Armadura Pesada (Dano)', 'Armadura Muito Pesada (Tank)'],
+    Atirador: ['Armadura Leve (Dano)', 'Armadura Média (Dano / Tank)'],
+    Guerreiro: ['Armadura Média (Dano)', 'Armadura Pesada (Tank)'],
+    Barbaro: ['Armadura Pesada (Dano)', 'Armadura Muito Pesada (Tank)'],
+    Arqueiro: ['Armadura Muito Leve (Dano)', 'Armadura Leve (Dano)']
   }
+
+  const validationSchema = yup.object().shape({
+    weapon: yup.string().required('Selecione sua arma'),
+    armor: yup.string().required('Selecione sua armadura'),
+  });
 
   return (
-    <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-      <Form className="mt-4">
-        <div className="mb-2">
-          <label htmlFor="weapon" className="block font-bold">
-            Arma:
-          </label>
-          <Field
-            as="select"
-            name="weapon"
-            validate={validateWeapon}
-            className="block w-full mt-1 p-2 border rounded"
-          >
-            <option value="">Selecione</option>
-            {selectedClass &&
-              weaponOptions[selectedClass].map((weapon: any) => (
-                <option key={weapon} value={weapon}>
-                  {weapon}
-                </option>
-              ))}
-          </Field>
+    <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={validationSchema}>
+      <Form className="text-amber-400 w-4/6 flex flex-col mt-8 justify-center gap-4">
+        <div className="flex flex-col gap-2 items-center">
+          <div className="flex gap-4 items-center border border-amber-400 h-[50px] w-full rounded-md pr-2">
+            <div className="h-full w-[64px] bg-transparent flex items-center justify-center border-r border-amber-400 outline-none">
+              <Gi3DHammer size={32} className="text-amber-400" />
+            </div>
+            <Field
+              as="select"
+              name="weapon"
+              className="block w-full mt-1 p-4 rounded bg-transparent outline-none"
+            >
+              <option value="">Selecione sua arma</option>
+              {selectedClass &&
+                weaponOptions[selectedClass].map((weapon: any) => (
+                  <option key={weapon} value={weapon}>
+                    {weapon}
+                  </option>
+                ))}
+            </Field>
+          </div>
           <ErrorMessage
             name="weapon"
             component="div"
             className="text-red-500"
           />
-        </div>
-        <div className="mb-2">
+        </div>        
+        <div className="flex flex-col gap-2 items-center">
+          <div className="flex gap-4 items-center border border-amber-400 h-[50px] w-full rounded-md pr-2">
+            <div className="h-full w-[64px] bg-transparent flex items-center justify-center border-r border-amber-400 outline-none">
+              <GiAbdominalArmor size={32} className="text-amber-400" />
+            </div>
+            <Field
+              as="select"
+              name="armor"
+              className="block w-full mt-1 p-4 rounded bg-transparent outline-none"
+            >
+              <option value="">Selecione sua armadura</option>
+              {selectedClass &&
+                armorOptions[selectedClass].map((armor: any) => (
+                  <option key={armor} value={armor}>
+                    {armor}
+                  </option>
+                ))}
+            </Field>
+          </div>
+          <ErrorMessage
+            name="armor"
+            component="div"
+            className="text-red-500"
+          />
+        </div>       
+        
+        <div className="">
           <label htmlFor="hairColor" className="block font-bold">
             Cor do Cabelo:
           </label>
           <Field
             type="color"
             name="hairColor"
-            className="block w-full mt-1 p-2 border rounded"
+            className="block w-full mt-1 p-2 border border-amber-400 rounded bg-transparent"
           />
           <ErrorMessage
             name="hairColor"
@@ -73,10 +107,25 @@ const CustomizeForm: React.FC<{
             className="text-red-500"
           />
         </div>
-        <div className="flex justify-end">
+        <div className="">
+          <label htmlFor="skinColor" className="block font-bold">
+            Cor da Pele:
+          </label>
+          <Field
+            type="color"
+            name="skinColor"
+            className="block w-full mt-1 p-2 border border-amber-400 rounded bg-transparent"
+          />
+          <ErrorMessage
+            name="skinColor"
+            component="div"
+            className="text-red-500"
+          />
+        </div>
+        <div className="flex w-full">
           <button
             type="submit"
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            className="px-4 py-2 text-black rounded-md w-full mt-2 hover:outline bg-amber-400 hover:bg-transparent hover:outline-amber-400 hover:text-amber-400 font-bold"
           >
             Salvar
           </button>
