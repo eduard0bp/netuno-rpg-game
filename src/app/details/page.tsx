@@ -27,71 +27,61 @@ const Details: React.FC = () => {
   }
 
   return (
-    <div className="container mx-auto py-8">
-      <h1 className="text-3xl font-bold mb-4">
-        Detalhes do Personagem e da Montaria
+    <div className="min-h-screen w-full flex flex-col gap-4 items-center justify-center from-black to-gray-950 bg-gradient-to-b text-white p-4 sm:p-8 md:p-12 lg:p-16">
+      <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-amber-400">
+        DETALHES DO PERSONAGEM
       </h1>
-      {selectedClass && (
-        <>
-          <h2 className="text-xl font-bold mb-2">Detalhes do Personagem</h2>
-          <p>
-            <strong>Personagem:</strong> {selectedClass.class}
-          </p>
-          {selectedClass.customization && (
-            <>
-              <p>
-                <strong>Arma:</strong> {selectedClass.customization.weapon}
-              </p>
-              <p>
-                <strong>Cor do Cabelo:</strong>{' '}
-                {selectedClass.customization.hairColor}
-              </p>
-            </>
-          )}
+      <div className="flex flex-col items-start gap-2 text-gray-400 text-lg sm:text-xl md:text-2xl lg:text-3xl">
+        {selectedClass && (
+          <>
+            <p>Personagem: {selectedClass.class}</p>
+            {selectedClass.customization && (
+              <>
+                <p>Arma: {selectedClass.customization.weapon}</p>
+                <p>Armadura: {selectedClass.customization.armor}</p>
+                <div>
+                  <p className="flex gap-2 items-center justify-center ">
+                    Cor do Cabelo:{' '}
+                    <div
+                      className="w-10 h-10 md:w-12 md:h-12 lg:w-16 lg:h-16 rounded-full border-2 border-gray-400"
+                      style={{
+                        backgroundColor: `${selectedClass.customization.hairColor}`
+                      }}
+                    ></div>
+                  </p>{' '}
+                </div>
+                <div>
+                  <p className="flex gap-2 items-center justify-center">
+                    Cor da Pele:{' '}
+                    <div
+                      className="w-10 h-10 md:w-12 md:h-12 lg:w-16 lg:h-16 rounded-full border-2 border-gray-400"
+                      style={{
+                        backgroundColor: `${selectedClass.customization.skinColor}`
+                      }}
+                    ></div>
+                  </p>{' '}
+                </div>
+              </>
+            )}
+            <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-amber-400">
+              Atributos:{' '}
+            </p>
+            {selectedClass.class === 'Arqueiro' && (
+              <>
+                <p>Vida: 100</p>
+                <p>Stamina: 100</p>
+                <p>Agilidade: 200</p>
+                <p>Força: 50</p>
+              </>
+            )}
 
-          {selectedClass.class === 'Arqueiro' && (
-            <>
-              <p>
-                <strong>Vida:</strong> 100
-              </p>
-              <p>
-                <strong>Stamina:</strong> 100
-              </p>
-              <p>
-                <strong>Agilidade:</strong> 200
-              </p>
-              <p>
-                <strong>Força:</strong> 50
-              </p>
-            </>
-          )}
-
-          {selectedClass.class === 'Guerreiro' && (
-            <>
-              <p>
-                <strong>Vida:</strong> 150
-              </p>
-              <p>
-                <strong>Stamina:</strong> 100
-              </p>
-              <p>
-                <strong>Agilidade:</strong> 100
-              </p>
-              <p>
-                <strong>Força:</strong> 200
-              </p>
-            </>
-          )}
-        </>
-      )}
-      {selectedMount && (
-        <>
-          <h2 className="text-xl font-bold mt-4 mb-2">Detalhes da Montaria</h2>
-          <p>
-            <strong>Montaria Selecionada:</strong> {selectedMount}
-          </p>
-        </>
-      )}
+            <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-amber-400">
+              Montaria:
+            </p>
+            <p>{selectedMount}</p>
+          </>
+        )}
+      </div>
     </div>
   )
 }
