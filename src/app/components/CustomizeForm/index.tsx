@@ -22,7 +22,7 @@ const CustomizeForm: React.FC<{
     Atirador: ['Arma'],
     Guerreiro: ['Espada', 'Escudo'],
     Barbaro: ['Machado', 'Marreta'],
-    Arqueiro: ['Arco', 'Faca']
+    Arqueiro: ['Arco']
   }
 
   const armorOptions: any = {
