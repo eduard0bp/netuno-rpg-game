@@ -67,7 +67,7 @@ export default function Home() {
           validationSchema={validationSchema}
           onSubmit={handleLogin}
         >
-          {() => (
+          {( { isSubmitting } ) => (
             <Form className="h-full flex flex-col justify-center items-center gap-4 w-[500px]">
               <div className="flex flex-col gap-2 items-center">
                 <div className="flex gap-4 items-center border h-[50px] rounded-md">
@@ -113,19 +113,21 @@ export default function Home() {
                 <div>
                   <button
                     type="submit"
-                    className="px-4 py-2 bg-gray-400 text-white rounded-md w-[270px] outline outline-gray-700 hover:bg-transparent"
+                    className="px-4 py-2 bg-gray-400 text-white rounded-md w-[270px] outline outline-gray-700 hover:bg-transparent disabled:cursor-not-allowed disabled:opacity-75"
+                    disabled={isSubmitting}
                   >
-                    Entrar
+                    {isSubmitting ? 'Entrando...' : 'Entrar'}
                   </button>
                 </div>
 
                 <div>
                   <button
                     type="button"
-                    className="px-4 py-2 bg-transparent text-amber-400 outline rounded-md w-[270px]"
+                    className="px-4 py-2 bg-transparent text-amber-400 outline rounded-md w-[270px] disabled:cursor-not-allowed disabled:opacity-75"
                     onClick={() => {
                       router.push('/register')
                     }}
+                    disabled={isSubmitting}
                   >
                     Criar conta
                   </button>

@@ -35,102 +35,109 @@ const CustomizeForm: React.FC<{
 
   const validationSchema = yup.object().shape({
     weapon: yup.string().required('Selecione sua arma'),
-    armor: yup.string().required('Selecione sua armadura'),
-  });
+    armor: yup.string().required('Selecione sua armadura')
+  })
 
   return (
-    <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={validationSchema}>
-      <Form className="text-amber-400 w-4/6 flex flex-col mt-8 justify-center gap-4">
-        <div className="flex flex-col gap-2 items-center">
-          <div className="flex gap-4 items-center border border-amber-400 h-[50px] w-full rounded-md pr-2">
-            <div className="h-full w-[64px] bg-transparent flex items-center justify-center border-r border-amber-400 outline-none">
-              <Gi3DHammer size={32} className="text-amber-400" />
+    <Formik
+      initialValues={initialValues}
+      onSubmit={handleSubmit}
+      validationSchema={validationSchema}
+    >
+      {({ isSubmitting }) => (
+        <Form className="text-amber-400 w-4/6 flex flex-col mt-8 justify-center gap-4">
+          <div className="flex flex-col gap-2 items-center">
+            <div className="flex gap-4 items-center border border-amber-400 h-[50px] w-full rounded-md pr-2">
+              <div className="h-full w-[64px] bg-transparent flex items-center justify-center border-r border-amber-400 outline-none">
+                <Gi3DHammer size={32} className="text-amber-400" />
+              </div>
+              <Field
+                as="select"
+                name="weapon"
+                className="block w-full mt-1 p-4 rounded bg-transparent outline-none"
+              >
+                <option value="">Selecione sua arma</option>
+                {selectedClass &&
+                  weaponOptions[selectedClass].map((weapon: any) => (
+                    <option key={weapon} value={weapon}>
+                      {weapon}
+                    </option>
+                  ))}
+              </Field>
             </div>
-            <Field
-              as="select"
+            <ErrorMessage
               name="weapon"
-              className="block w-full mt-1 p-4 rounded bg-transparent outline-none"
-            >
-              <option value="">Selecione sua arma</option>
-              {selectedClass &&
-                weaponOptions[selectedClass].map((weapon: any) => (
-                  <option key={weapon} value={weapon}>
-                    {weapon}
-                  </option>
-                ))}
-            </Field>
+              component="div"
+              className="text-red-500"
+            />
           </div>
-          <ErrorMessage
-            name="weapon"
-            component="div"
-            className="text-red-500"
-          />
-        </div>        
-        <div className="flex flex-col gap-2 items-center">
-          <div className="flex gap-4 items-center border border-amber-400 h-[50px] w-full rounded-md pr-2">
-            <div className="h-full w-[64px] bg-transparent flex items-center justify-center border-r border-amber-400 outline-none">
-              <GiAbdominalArmor size={32} className="text-amber-400" />
+          <div className="flex flex-col gap-2 items-center">
+            <div className="flex gap-4 items-center border border-amber-400 h-[50px] w-full rounded-md pr-2">
+              <div className="h-full w-[64px] bg-transparent flex items-center justify-center border-r border-amber-400 outline-none">
+                <GiAbdominalArmor size={32} className="text-amber-400" />
+              </div>
+              <Field
+                as="select"
+                name="armor"
+                className="block w-full mt-1 p-4 rounded bg-transparent outline-none"
+              >
+                <option value="">Selecione sua armadura</option>
+                {selectedClass &&
+                  armorOptions[selectedClass].map((armor: any) => (
+                    <option key={armor} value={armor}>
+                      {armor}
+                    </option>
+                  ))}
+              </Field>
             </div>
-            <Field
-              as="select"
+            <ErrorMessage
               name="armor"
-              className="block w-full mt-1 p-4 rounded bg-transparent outline-none"
-            >
-              <option value="">Selecione sua armadura</option>
-              {selectedClass &&
-                armorOptions[selectedClass].map((armor: any) => (
-                  <option key={armor} value={armor}>
-                    {armor}
-                  </option>
-                ))}
-            </Field>
+              component="div"
+              className="text-red-500"
+            />
           </div>
-          <ErrorMessage
-            name="armor"
-            component="div"
-            className="text-red-500"
-          />
-        </div>       
-        
-        <div className="">
-          <label htmlFor="hairColor" className="block font-bold">
-            Cor do Cabelo:
-          </label>
-          <Field
-            type="color"
-            name="hairColor"
-            className="block w-full mt-1 p-2 border border-amber-400 rounded bg-transparent"
-          />
-          <ErrorMessage
-            name="hairColor"
-            component="div"
-            className="text-red-500"
-          />
-        </div>
-        <div className="">
-          <label htmlFor="skinColor" className="block font-bold">
-            Cor da Pele:
-          </label>
-          <Field
-            type="color"
-            name="skinColor"
-            className="block w-full mt-1 p-2 border border-amber-400 rounded bg-transparent"
-          />
-          <ErrorMessage
-            name="skinColor"
-            component="div"
-            className="text-red-500"
-          />
-        </div>
-        <div className="flex w-full">
-          <button
-            type="submit"
-            className="px-4 py-2 text-black rounded-md w-full mt-2 hover:outline bg-amber-400 hover:bg-transparent hover:outline-amber-400 hover:text-amber-400 font-bold"
-          >
-            Salvar
-          </button>
-        </div>
-      </Form>
+
+          <div className="">
+            <label htmlFor="hairColor" className="block font-bold">
+              Cor do Cabelo:
+            </label>
+            <Field
+              type="color"
+              name="hairColor"
+              className="block w-full mt-1 p-2 border border-amber-400 rounded bg-transparent"
+            />
+            <ErrorMessage
+              name="hairColor"
+              component="div"
+              className="text-red-500"
+            />
+          </div>
+          <div className="">
+            <label htmlFor="skinColor" className="block font-bold">
+              Cor da Pele:
+            </label>
+            <Field
+              type="color"
+              name="skinColor"
+              className="block w-full mt-1 p-2 border border-amber-400 rounded bg-transparent"
+            />
+            <ErrorMessage
+              name="skinColor"
+              component="div"
+              className="text-red-500"
+            />
+          </div>
+          <div className="flex w-full">
+            <button
+              type="submit"
+              className="px-4 py-2 text-black rounded-md w-full mt-2 hover:outline bg-amber-400 hover:bg-transparent hover:outline-amber-400 hover:text-amber-400 font-bold disabled:opacity-75 disabled:cursor-not-allowed"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? 'Escolhendo...' : 'Escolher personagem'}
+            </button>
+          </div>
+        </Form>
+      )}
     </Formik>
   )
 }

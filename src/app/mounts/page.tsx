@@ -69,7 +69,7 @@ const Mounts: React.FC = () => {
   }
 
   return (
-    <div className="h-full w-full flex flex-col items-center justify-center gap-4  from-black to-gray-950 bg-gradient-to-b">
+    <div className="min-h-screen bg-gradient-to-b from-black to-gray-950 flex flex-col items-center justify-center gap-4 px-4 sm:px-8 md:px-16 lg:px-32 xl:px-40">
       <h1 className="text-6xl text-amber-400">ESCOLHA A SUA MONTARIA</h1>
       <div className="grid gap-4 grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
         {mountList.map(mount => (

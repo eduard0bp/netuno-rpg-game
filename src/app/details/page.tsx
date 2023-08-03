@@ -66,12 +66,45 @@ const Details: React.FC = () => {
             <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-amber-400">
               Atributos:{' '}
             </p>
+            
             {selectedClass.class === 'Arqueiro' && (
               <>
                 <p>Vida: 100</p>
                 <p>Stamina: 100</p>
                 <p>Agilidade: 200</p>
                 <p>Força: 50</p>
+              </>
+            )}
+            {selectedClass.class === 'Atirador' && (
+              <>
+                <p>Vida: 100</p>
+                <p>Stamina: 100</p>
+                <p>Agilidade: 200</p>
+                <p>Força: 50</p>
+              </>
+            )}
+            {selectedClass.class === 'Barbaro' && (
+              <>
+                <p>Vida: 150</p>
+                <p>Stamina: 100</p>
+                <p>Agilidade: 100</p>
+                <p>Força: 200</p>
+              </>
+            )}
+            {selectedClass.class === 'Paladino' && (
+              <>
+                <p>Vida: 200</p>
+                <p>Stamina: 100</p>
+                <p>Agilidade: 100</p>
+                <p>Força: 150</p>
+              </>
+            )}
+            {selectedClass.class === 'Guerreiro' && (
+              <>
+                <p>Vida: 200</p>
+                <p>Stamina: 60</p>
+                <p>Agilidade: 80</p>
+                <p>Força: 200</p>
               </>
             )}
 
